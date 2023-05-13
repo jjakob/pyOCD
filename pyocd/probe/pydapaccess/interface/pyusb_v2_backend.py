@@ -40,7 +40,6 @@ TRACE = LOG.getChild("trace")
 TRACE.setLevel(logging.CRITICAL)
 
 try:
-    import libusb_package
     import usb.core
     import usb.util
 except ImportError:
@@ -95,7 +94,7 @@ class PyUSBv2(Interface):
         assert self.closed is True
 
         # Get device handle
-        dev = libusb_package.find(custom_match=HasCmsisDapv2Interface(self.serial_number))
+        dev = usb.core.find(custom_match=HasCmsisDapv2Interface(self.serial_number))
         if dev is None:
             raise DAPAccessIntf.DeviceError(f"Probe {self.serial_number} not found")
 
@@ -204,7 +203,7 @@ class PyUSBv2(Interface):
         """@brief Returns all the connected devices with a CMSIS-DAPv2 interface."""
         # find all cmsis-dap devices
         try:
-            all_devices = libusb_package.find(find_all=True, custom_match=HasCmsisDapv2Interface())
+            all_devices = usb.core.find(find_all=True, custom_match=HasCmsisDapv2Interface())
         except usb.core.NoBackendError:
             common.show_no_libusb_warning()
             return []
