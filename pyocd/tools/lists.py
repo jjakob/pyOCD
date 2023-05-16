@@ -16,7 +16,7 @@
 # limitations under the License.
 
 import os
-from importlib_metadata import entry_points
+from importlib.metadata import entry_points
 
 from .. import __version__
 from ..core.session import Session

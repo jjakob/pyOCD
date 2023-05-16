@@ -16,7 +16,7 @@
 # limitations under the License.
 
 import logging
-from importlib_metadata import entry_points
+from importlib.metadata import entry_points
 from typing import (
     Any,
     Dict,
