@@ -17,7 +17,7 @@
 
 import threading
 import logging
-import importlib_resources
+import importlib
 import zipfile
 
 from .parser import SVDParser
@@ -31,7 +31,7 @@ class SVDFile(object):
     @classmethod
     def from_builtin(cls, svd_name):
         try:
-            zip_ref = importlib_resources.files("pyocd").joinpath(BUILTIN_SVD_DATA_PATH)
+            zip_ref = importlib.resources.files("pyocd").joinpath(BUILTIN_SVD_DATA_PATH)
             zip_stream = zip_ref.open('rb')
             zip = zipfile.ZipFile(zip_stream, 'r')
             return SVDFile(zip.open(svd_name))
